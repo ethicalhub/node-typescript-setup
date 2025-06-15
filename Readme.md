@@ -7,3 +7,7 @@ To run this project
 - To setup typescript
     - npm i typescript --save-dev
     - npx tsc --init
+
+
+# Project Structure
+- MVC Architecture
