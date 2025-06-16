@@ -1,0 +1,37 @@
+# Ignore node_modules and build folders
+node_modules
+dist
+build
+.next
+out
+
+# Ignore configuration and environment files
+*.config.js
+*.config.ts
+.env
+.env.*
+
+# Ignore version control and system files
+.git
+.DS_Store
+
+# Ignore logs
+*.log
+
+# Ignore bundled/minified files
+*.min.js
+*.bundle.js
+
+# Ignore test snapshots or mocks
+__snapshots__/
+__mocks__/
+
+# Ignore public/static assets
+public
+static
+
+# Ignore coverage and lock files
+coverage
+yarn.lock
+pnpm-lock.yaml
+package-lock.json

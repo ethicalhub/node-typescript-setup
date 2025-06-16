@@ -13,7 +13,7 @@
         "lint:fix": "eslint --cache --fix",
         "lint-staged": "lint-staged",
         "format-check": "prettier . --check",
-        "format:fix": "prettier . --fix"
+        "format:fix": "prettier . --write"
     },
     "lint-staged": {
         "**/*.{js,ts,tsx}": [
