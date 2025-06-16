@@ -8,5 +8,10 @@ export default tseslint.config(
 
   {
     ignores: ['dist/**'],
-  }
+     rules: {
+    'no-console': 'error',
+    'quotes': ['error', 'single', { allowTemplateLiterals: true }],
+  },
+  },
+   
 );
