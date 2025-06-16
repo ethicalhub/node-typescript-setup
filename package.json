@@ -11,7 +11,7 @@
     "prepare": "husky",
       "lint": "eslint . --cache",
   "lint:fix": "eslint . --cache --fix",
-  "lint-staged": "lint-staged"
+      "lint-staged": "lint-staged"
 
   },
   "lint-staged": {
