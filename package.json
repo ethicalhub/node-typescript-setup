@@ -1,39 +1,41 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "prepare": "husky",
-    "lint": "NODE_ENV=production eslint . --cache",
-  "lint:dev": "NODE_ENV=development eslint . --cache",
-    "lint:fix": "eslint . --cache --fix",
-    "lint-staged": "lint-staged"
-  },
-  "lint-staged": {
-    "**/*.{js,ts,tsx}": [
-      "eslint --fix"
-    ]
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@eslint/js": "^9.29.0",
-    "@types/node": "^24.0.1",
-    "dotenv": "^16.5.0",
-    "eslint": "^9.29.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.2",
-    "nodemon": "^3.1.10",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.34.0"
-  }
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon src/server.ts",
+        "build": "tsc",
+        "start": "node dist/server.js",
+        "prepare": "husky",
+        "lint": "eslint --cache",
+        "lint:fix": "eslint --cache --fix",
+        "lint-staged": "lint-staged",
+        "format-check": "prettier . --check",
+        "format:fix": "prettier . --fix"
+    },
+    "lint-staged": {
+        "**/*.{js,ts,tsx}": [
+            "npm run format:fix"
+        ]
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@commitlint/cli": "^19.8.1",
+        "@commitlint/config-conventional": "^19.8.1",
+        "@eslint/js": "^9.29.0",
+        "@types/node": "^24.0.1",
+        "eslint": "^9.29.0",
+        "eslint-config-prettier": "^10.1.5",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.2",
+        "nodemon": "^3.1.10",
+        "prettier": "3.5.3",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.34.0"
+    }
 }
