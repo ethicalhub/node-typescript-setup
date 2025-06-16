@@ -1,1 +1,1 @@
-console.log("Typescript +  test")
+console.log("Server is starting...");
