@@ -2,16 +2,17 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
+
 export default tseslint.config(
   eslint.configs.recommended,
   tseslint.configs.recommended,
+   {
+    rules: {
+      'no-console': 'error', // ❌ Error on any console.log
+    },
+  },
 
   {
-    ignores: ['dist/**'],
-     rules: {
-    'no-console': 'error',
-    'quotes': ['error', 'single', { allowTemplateLiterals: true }],
-  },
-  },
-   
+     ignores: ['dist/**', 'node_modules/**'],
+  }
 );
