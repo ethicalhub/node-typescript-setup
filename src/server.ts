@@ -1,1 +1,1 @@
-console.log("Typescript + ESLint test")
+// console.log("Typescript +  test")

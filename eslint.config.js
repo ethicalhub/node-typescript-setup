@@ -8,7 +8,7 @@ export default tseslint.config(
   tseslint.configs.recommended,
    {
     rules: {
-      'no-console': 'error', // ❌ Error on any console.log
+      'no-console': 'error',
     },
   },
 
