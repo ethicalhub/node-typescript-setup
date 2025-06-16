@@ -8,8 +8,18 @@
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "prepare": "husky"
+    "prepare": "husky",
+      "lint": "eslint . --cache",
+  "lint:fix": "eslint . --cache --fix",
+  "lint-staged": "lint-staged"
+
   },
+  "lint-staged": {
+  "**/*.{js,ts,tsx}": [
+    "eslint --fix"
+  ]
+
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
