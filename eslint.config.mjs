@@ -8,8 +8,19 @@ export default tseslint.config(
     tseslint.configs.recommended,
     eslintConfigPrettier,
     {
+        languageOptions: {
+            globals: {
+                // ✅ Define Node.js globals manually
+                process: 'readonly',
+                __dirname: 'readonly',
+                module: 'readonly',
+                require: 'readonly',
+                console: 'readonly'
+            }
+        },
+
         rules: {
-            'no-console': 'error',
+            // 'no-console': 'error',
             'no-unused-vars': 'warn',
             'no-undef': 'error',
             quotes: ['error', 'single', { allowTemplateLiterals: true }]
