@@ -9,3 +9,17 @@ To run this project
 # Project Structure
 
 - MVC Architecture
+
+# Steps
+
+- NodeJS
+- Git & Github
+- Husky, lint-staged
+- commitlint
+- eslint
+- prettier
+- typescript
+- nodemon
+- folder structure
+
+read documentation if something is breaking..
