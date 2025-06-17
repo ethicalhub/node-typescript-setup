@@ -7,6 +7,10 @@ import limiter from '@/lib/express_rate_limit'
 
 // custom module imports
 import config from '@/config/config'
+
+// router imports
+import v1router from '@/routes/v1'
+
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -36,14 +40,9 @@ const CorsOptions: CorsOptions = {
 app.use(cors(CorsOptions))
 ;(async () => {
     try {
-        app.get('/', (req, res) => {
-            res.send({
-                message: 'Hello, World!'
-            })
-        })
-
+        app.use('/api/v1', v1router)
         app.listen(config.PORT, () => {
-            // console.log(`Server is running on http://localhost:${config.PORT}`)
+            console.log(`Server is running on http://localhost:${config.PORT}`)
         })
     } catch (error) {
         console.error('Error starting the server:', error)
