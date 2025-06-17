@@ -22,4 +22,5 @@ To run this project
 - nodemon
 - folder structure
 
+Check package.json for custom scripts
 read documentation if something is breaking..
