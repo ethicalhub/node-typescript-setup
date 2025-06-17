@@ -51,3 +51,15 @@ app.use(cors(CorsOptions))
         }
     }
 })()
+
+const handleServerShutdown = () => {
+    try {
+        console.log('Server is shutting down...')
+        process.exit(0)
+    } catch (error) {
+        console.error('Error during server shutdown:', error)
+        process.exit(1)
+    }
+}
+process.on('SIGINT', handleServerShutdown)
+process.on('SIGTERM', handleServerShutdown)
