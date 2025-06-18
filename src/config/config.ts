@@ -8,7 +8,8 @@ dotenv.config()
 const config = {
     PORT: process.env.PORT || 3001,
     NODE_ENV: process.env.NODE_ENV,
-    WHITELIST_ORIGINS: ['http://localhost:3001', 'https://example.com']
+    WHITELIST_ORIGINS: ['http://localhost:3001', 'https://example.com'],
+    MONGO_URI: process.env.MONGO_URI
 }
 
 export default config

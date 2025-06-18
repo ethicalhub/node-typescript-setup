@@ -7,6 +7,7 @@ import limiter from '@/lib/express_rate_limit'
 
 // custom module imports
 import config from '@/config/config'
+import { connectDb, disconnectDb } from './lib/mongoose'
 
 // router imports
 import v1router from '@/routes/v1'
@@ -40,6 +41,7 @@ const CorsOptions: CorsOptions = {
 app.use(cors(CorsOptions))
 ;(async () => {
     try {
+        await connectDb()
         app.use('/api/v1', v1router)
         app.listen(config.PORT, () => {
             console.log(`Server is running on http://localhost:${config.PORT}`)
@@ -52,8 +54,9 @@ app.use(cors(CorsOptions))
     }
 })()
 
-const handleServerShutdown = () => {
+const handleServerShutdown = async () => {
     try {
+        await disconnectDb()
         console.log('Server is shutting down...')
         process.exit(0)
     } catch (error) {
