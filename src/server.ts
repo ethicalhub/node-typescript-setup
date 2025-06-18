@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import compression from 'compression'
 import limiter from '@/lib/express_rate_limit'
+import { logger } from '@/lib/winston'
 
 // custom module imports
 import config from '@/config/config'
@@ -35,6 +36,7 @@ const CorsOptions: CorsOptions = {
         } else {
             // Reject requests from non-whitelisted origins
             callback(new Error(`CORS Error: ${origin} is not allowed by CORS policy`), false)
+            logger.warn(`CORS Error: ${origin} is not allowed by CORS policy`)
         }
     }
 }
@@ -44,10 +46,10 @@ app.use(cors(CorsOptions))
         await connectDb()
         app.use('/api/v1', v1router)
         app.listen(config.PORT, () => {
-            console.log(`Server is running on http://localhost:${config.PORT}`)
+            logger.info(`Server is running on http://localhost:${config.PORT}`)
         })
     } catch (error) {
-        console.error('Error starting the server:', error)
+        logger.error('Error starting the server:', error)
         if (config.NODE_ENV === 'production') {
             process.exit(1)
         }
@@ -57,10 +59,10 @@ app.use(cors(CorsOptions))
 const handleServerShutdown = async () => {
     try {
         await disconnectDb()
-        console.log('Server is shutting down...')
+        logger.warn('Server is shutting down...')
         process.exit(0)
     } catch (error) {
-        console.error('Error during server shutdown:', error)
+        logger.error('Error during server shutdown:', error)
         process.exit(1)
     }
 }

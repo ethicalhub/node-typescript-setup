@@ -3,6 +3,8 @@ import config from '@/config/config'
 
 import { ConnectOptions } from 'mongoose'
 
+import { logger } from '@/lib/winston'
+
 const clientOptions: ConnectOptions = {
     dbName: '0xCoders_db',
     appName: '0xCoders',
@@ -19,12 +21,12 @@ export const connectDb = async () => {
     }
     try {
         await mongoose.connect(config.MONGO_URI, clientOptions)
-        console.log('MongoDB connected successfully', {
+        logger.info('MongoDB connected successfully', {
             uri: config.MONGO_URI,
             clientOptions: clientOptions
         })
     } catch (error) {
-        console.error('Error connecting to MongoDB:', error)
+        logger.error('Error connecting to MongoDB:', error)
         if (error instanceof mongoose.Error) {
             throw error
         }
@@ -34,12 +36,12 @@ export const connectDb = async () => {
 export const disconnectDb = async () => {
     try {
         await mongoose.disconnect()
-        console.log('MongoDB disconnected successfully', {
+        logger.info('MongoDB disconnected successfully', {
             uri: config.MONGO_URI,
             clientOptions: clientOptions
         })
     } catch (error) {
-        console.error('Error disconnecting from MongoDB:', error)
+        logger.error('Error disconnecting from MongoDB:', error)
         if (error instanceof mongoose.Error) {
             throw error
         }

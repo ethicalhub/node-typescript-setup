@@ -22,5 +22,7 @@ To run this project
 - nodemon
 - folder structure
 
+- mongoose, MongoDB
+
 Check package.json for custom scripts
 read documentation if something is breaking..
