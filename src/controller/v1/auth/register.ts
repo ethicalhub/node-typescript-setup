@@ -2,8 +2,10 @@ import { logger } from '@/lib/winston'
 // import config from '@/config/config'
 
 import { Request, Response } from 'express'
+import { generateAccessToken, generateRefreshToken } from '@/lib/jwt'
 import User from '@/model/user'
 import { genUserName } from '@/utils'
+import Token from '@/model/token'
 import { IUser } from '@/types'
 
 const register = async (req: Request, res: Response): Promise<void> => {
@@ -16,8 +18,25 @@ const register = async (req: Request, res: Response): Promise<void> => {
         password: password // Ensure password is included in the request body
     })
 
-    console.log('Registering user:', username, email, role)
+    const accessToken = generateAccessToken(newUser._id)
+    const refreshToken = generateRefreshToken(newUser._id)
+
+    await Token.create({
+        token: refreshToken,
+        userId: newUser._id
+    })
+
+    logger.info(`New user Token created:`, {
+        username: newUser.username,
+        email: newUser.email,
+        role: newUser.role
+    })
     try {
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+            sameSite: 'strict'
+        })
         res.status(201).json({
             status: 'success',
             user: {
@@ -25,7 +44,14 @@ const register = async (req: Request, res: Response): Promise<void> => {
                 email: newUser.email,
                 role: newUser.role
             },
+            accessToken,
             message: 'User registered successfully'
+        })
+
+        logger.info(`User registered successfully:`, {
+            username: newUser.username,
+            email: newUser.email,
+            role: newUser.role
         })
     } catch (error) {
         logger.error(`Error in registerUser: ${error}`)

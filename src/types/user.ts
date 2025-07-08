@@ -1,3 +1,5 @@
+import { Types } from 'mongoose'
+
 export interface IUser {
     username: string
     email: string
@@ -12,4 +14,9 @@ export interface IUser {
         website?: string
         youtube?: string
     }
+}
+
+export interface IUserToken {
+    token: string
+    userId: Types.ObjectId
 }

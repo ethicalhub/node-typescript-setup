@@ -1,5 +1,7 @@
+import bcrypt from 'bcrypt'
 import { Schema, model } from 'mongoose'
 import { IUser } from '@/types'
+import config from '@/config/config'
 
 const userSchema = new Schema<IUser>(
     {
@@ -63,5 +65,14 @@ const userSchema = new Schema<IUser>(
         timestamps: true
     }
 )
+
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        next()
+        return
+    }
+
+    this.password = await bcrypt.hash(this.password, config.SALT_ROUNDS) // Hash the password before saving
+})
 
 export default model<IUser>('User', userSchema, 'users') // 'users' is the collection name in MongoDB
